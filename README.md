@@ -1,0 +1,11 @@
+# TODO:
+- [ ] Core:
+    - [ ] Store API(FakeStoreAPI, JSONPlaceholder.typicode) ?
+    - [ ] Main page (some filler content)
+    - [ ] Shop page
+     - [ ] Items have quantity selectors (how to update item count; item decrement without deleting items)
+    - [ ] Cart page
+    - [ ] Nav bar
+     - [ ] dynamic item counter on cart link
+    - [ ] Routing for SPA
+    - [ ] Testing of components
