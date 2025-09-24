@@ -1,0 +1,9 @@
+.cartItemList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* .cartItemList:nth-child(even) { */
+/*   background-color: gray; */
+/* } */

@@ -1,0 +1,14 @@
+.item {
+  display: flex;
+  padding: 15px;
+  /* justify-content: space-between; */
+  gap: 15px;
+}
+
+.description {
+  flex: 1;
+}
+
+.item:nth-child(even) {
+  background-color: #464646;
+}

@@ -1,0 +1,38 @@
+.navBar {
+  /* position: fixed; */
+  /* top: 0; */
+  width: 100%;
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.itemCount {
+  background-color: #dd4333;
+  border-radius: 50%;
+
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+
+  display: inline-block;
+  color: white;
+  position: absolute;
+
+  /* justify-self: center; */
+}
+
+.navBarItem {
+  position: relative;
+}
+
+.link {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.content {
+  width: 80%;
+}
