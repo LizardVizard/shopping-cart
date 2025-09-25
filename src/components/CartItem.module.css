@@ -5,10 +5,30 @@
   gap: 15px;
 }
 
+.item > img {
+  width: 160px;
+  /* height: 160px; */
+  background-color: rgba(177, 177, 177, 0.35);
+  padding: 1rem;
+  border-radius: 3px;
+  aspect-ratio: auto;
+}
+
 .description {
   flex: 1;
 }
 
+.item > button {
+  height: fit-content;
+}
+
 .item:nth-child(even) {
   background-color: #464646;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-right: 3rem;
 }

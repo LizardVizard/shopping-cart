@@ -4,6 +4,7 @@
   border-radius: 3px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 15px;
 }
 
@@ -15,14 +16,21 @@
 .description > img {
   min-width: 150px;
   height: 150px;
+  flex: 1;
 }
 
 form {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   gap: 5px;
+  align-items: center;
 }
 
 form > input {
   /* width: 50%; */
+  height: 1.2rem;
+}
+
+form > button {
+  flex: 1;
 }

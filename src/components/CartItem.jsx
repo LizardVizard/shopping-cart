@@ -6,7 +6,6 @@ import style from "./CartItem.module.css"
 function CartItem({ name, image, quantity, itemQuantityChange, itemDelete }) {
 
   function handleChange(e) {
-    console.log(e.target.value)
     itemQuantityChange(Number(e.target.value))
 
   }
@@ -15,10 +14,11 @@ function CartItem({ name, image, quantity, itemQuantityChange, itemDelete }) {
     <div className={style.item}>
       <img src={image || placeholderImage} alt="Item icon" />
       <div className={style.description}>
-        <p>{name}</p>
+        <h3>{name}</h3>
+        <p>{"text"}</p>
       </div>
-      <div>
-        <p></p>
+      <div className={style.controls}><div>
+        <span>Quantity: </span>
         <input
           type="number"
           min="0"
@@ -27,7 +27,7 @@ function CartItem({ name, image, quantity, itemQuantityChange, itemDelete }) {
           value={quantity}
           onChange={handleChange} />
       </div>
-      <button onClick={itemDelete}>Delete item from the cart</button>
+        <button onClick={itemDelete}>Delete item from the cart</button></div>
     </div>
   )
 }

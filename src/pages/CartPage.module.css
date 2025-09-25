@@ -4,6 +4,11 @@
   gap: 15px;
 }
 
+.total {
+  text-align: end;
+  padding-right: 5rem;
+}
+
 /* .cartItemList:nth-child(even) { */
 /*   background-color: gray; */
 /* } */
