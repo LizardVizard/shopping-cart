@@ -11,12 +11,11 @@ const CartPage = ({ cart, setCart }) => {
     setCart(cart.map((item) =>
       item.id === itemId ?
         { ...item, quantity: quantity } :
-        { ...item }))
+        item))
   }
 
   function handleDeleteItem(itemId) {
-    const filteredCart = cart.filter((item) => item.id !== itemId)
-    setCart(filteredCart.map((item) => ({ ...item })))
+    setCart(cart.filter((item) => item.id !== itemId))
   }
 
   return (
