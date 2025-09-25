@@ -4,7 +4,7 @@ import style from "./ShoppingItem.module.css"
 
 import reactLogo from "../assets/react.svg"
 
-function ShopingItem({ name, image, quantity, handleClick }) {
+function ShopingItem({ name, image, price, quantity, handleClick }) {
   // const [quantity, setQuantity] = useState(itemCount)
   // TODO:
   // controlled input for quantity
@@ -26,9 +26,10 @@ function ShopingItem({ name, image, quantity, handleClick }) {
     <>
       <div className={style.card}>
         <div className={style.description}>
-          <p className={style.title}>{name}</p>
+          <p>{name}</p>
           <img src={image} alt="Item icon" />
         </div>
+        <h2>${price}</h2>
         <form onSubmit={handleSubmit}>
           <input
             name="quantity"

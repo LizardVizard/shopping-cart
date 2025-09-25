@@ -1,13 +1,21 @@
 # TODO:
 - [ ] Core:
     - [ ] Store API(FakeStoreAPI, JSONPlaceholder.typicode) ?
+     - [X] Fetch data
+     - [x] Check data for errors(network and request)
+     - [X] Display products
     - [ ] Main page (some filler content)
     - [x] Shop page
      - [x] Items have quantity selectors (how to update item count; item decrement without deleting items)
+     - [ ] Indication of adding to cart
+     - [ ] Sticky navbar
     - [x] Cart page
-     - [ ] Cart item style
-     - [ ] What to do when 0 items selected, delete the item or gray out
+     - [x] Cart item style
+     - [x] What to do when 0 items selected, delete the item or gray out
+     - [ ] Count total price
     - [x] Nav bar
      - [x] dynamic item counter on cart link
     - [x] Routing for SPA
     - [ ] Testing of components
+     - [ ] Shopping page(Item?)
+     - [ ] Cart page(Item?)
