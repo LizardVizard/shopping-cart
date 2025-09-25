@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react"
 import CartItem from "../components/CartItem"
 import style from "./CartPage.module.css"
 
 const CartPage = ({ cart, setCart }) => {
+  const [totalCost, setTotalCost] = useState(cart.reduce((total, item) => total + Number(item.price || 0), 0))
+
 
   function handleItemQuantityChange(itemId, quantity) {
     if (quantity <= 0) {
@@ -12,11 +15,19 @@ const CartPage = ({ cart, setCart }) => {
       item.id === itemId ?
         { ...item, quantity: quantity } :
         item))
+    // setTotalCost(cart.reduce((total, item) => total + Number(item.price || 0), 0))
   }
 
   function handleDeleteItem(itemId) {
     setCart(cart.filter((item) => item.id !== itemId))
   }
+
+  useEffect(() => {
+    setTotalCost(cart.reduce((total, item) =>
+      total + Number(item.price || 0) * (item.quantity || 0)
+      , 0)
+    )
+  }, [cart])
 
   return (
     <>
@@ -35,6 +46,8 @@ const CartPage = ({ cart, setCart }) => {
             />) :
           <h2>No items in cart</h2>}
       </div>
+
+      {<h2 className={style.total}>Total: ${totalCost.toFixed(2)}</h2>}
     </>
   )
 }
