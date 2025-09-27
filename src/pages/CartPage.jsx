@@ -6,6 +6,8 @@ const CartPage = ({ cart, setCart }) => {
   const [totalCost, setTotalCost] = useState(cart.reduce((total, item) => total + Number(item.price || 0), 0))
 
 
+  // NOTE: Could use useCallback to cache functions, but 
+  // React compiler already does that, but I don't want to bother right now.
   function handleItemQuantityChange(itemId, quantity) {
     if (quantity <= 0) {
       handleDeleteItem(itemId)

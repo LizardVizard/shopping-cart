@@ -12,10 +12,16 @@
     - [x] Cart page
      - [x] Cart item style
      - [x] What to do when 0 items selected, delete the item or gray out
-     - [ ] Count total price
+     - [x] Count total price
+     - [ ] Add cart item individual cost
     - [x] Nav bar
      - [x] dynamic item counter on cart link
     - [x] Routing for SPA
     - [ ] Testing of components
      - [ ] Shopping page(Item?)
      - [ ] Cart page(Item?)
+     - [ ] Test edge cases:
+        - [ ] Boundary values 
+        - [ ] Wrong types of values
+        - [ ] No values
+        - [ ] Placholder image ?
