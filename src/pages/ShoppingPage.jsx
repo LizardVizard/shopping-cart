@@ -6,7 +6,7 @@ import style from "./ShoppingPage.module.css"
 
 import placeholderImage from "/vite.svg"
 
-function ShoppingPage({ cart, setCart }) {
+function ShoppingPage({ handleItemAddOrModify }) {
   const [catalogue, setCatalogue] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState("")
@@ -28,19 +28,6 @@ function ShoppingPage({ cart, setCart }) {
       .finally(setIsLoading(false))
   }, [])
 
-  const handleItemClick = (targetItem, quantity) => {
-    const cartItem = cart.find(item => item.id === targetItem.id)
-
-    if (cartItem) {
-      setCart(cart.map(item =>
-        item.id === cartItem.id ?
-          { ...item, quantity: item.quantity + quantity } :
-          item
-      ))
-    } else {
-      setCart([...cart, { ...targetItem, quantity: quantity }])
-    }
-  }
 
   return (
     <>
@@ -55,7 +42,7 @@ function ShoppingPage({ cart, setCart }) {
             name={item.title}
             price={item.price}
             image={item.image || placeholderImage}
-            handleClick={(quantity) => handleItemClick(item, quantity)}
+            handleClick={(quantity) => handleItemAddOrModify(item, quantity)}
           />
         )}
       </div>

@@ -29,26 +29,30 @@ const Layout = ({ cart }) => {
   )
 }
 
-const createRouter = (catalogue, cart, setCart) => createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <MainPage cart={cart} />
-  // },
-  // {
-  //   path: "/shop",
-  //   element: <ShopingPage catalogue={catalogue} cart={cart} setCart={setCart} />
-  // },
-  // {
-  //   path: "/cart",
-  //   element: <CartPage cart={cart} setCart={setCart} />
-  // },
+const createRouter = ({
+  catalogue,
+  cart,
+  handleItemQuantityChange,
+  handleItemDelete,
+  handleItemAddOrModify
+}) => createBrowserRouter([
   {
     path: "/",
     element: <Layout cart={cart} />,
     children: [
       { index: true, element: <MainPage /> },
-      { path: "shop", element: <ShoppingPage catalogue={catalogue} cart={cart} setCart={setCart} /> },
-      { path: "cart", element: <CartPage cart={cart} setCart={setCart} /> }
+      {
+        path: "shop", element: <ShoppingPage
+          catalogue={catalogue}
+          handleItemAddOrModify={handleItemAddOrModify}
+        />
+      },
+      {
+        path: "cart", element: <CartPage
+          cart={cart}
+          handleItemChangeQuantity={handleItemQuantityChange}
+          handleItemDelete={handleItemDelete} />
+      }
     ]
   }
 ])

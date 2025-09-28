@@ -28,8 +28,52 @@ const Main = () => {
   //   { id: 2, name: "Item3", quantity: 9834 },
   // ])
   // const cart = useContext(CartContext)
-  const [cart, setCart] = useState([{ id: 0, name: "context test", quantity: 2 }])
-  const router = createRouter(catalogue, cart, setCart)
+  const [cart, setCart] = useState([{ id: 0, name: "context test", quantity: 2, price: 10.50 }])
+  // const [cart, setCart] = useState([])
+
+  const handleItemQuantityChange = (itemId, itemQuantity) => {
+
+    // const itemQuantity = Number(quantity)
+    //
+    // if (itemQuantity < 1 || isNaN(itemQuantity)) {
+    //   // handleItemDelete(itemId)
+    //   return
+    // }
+
+    setCart(cart.map((item) =>
+      item.id === itemId ?
+        { ...item, quantity: itemQuantity } :
+        item
+    ))
+  }
+
+  const handleItemDelete = (itemId) => {
+    setCart(cart.filter((item) => item.id !== itemId))
+  }
+
+  const handleItemAddOrModify = (targetItem, quantity) => {
+    const cartItem = cart.find(item => item.id === targetItem.id)
+
+    if (cartItem) {
+      setCart(cart.map(item =>
+        item.id === cartItem.id ?
+          { ...item, quantity: item.quantity + quantity } :
+          item
+      ))
+    } else {
+      setCart([...cart, { ...targetItem, quantity: quantity }])
+    }
+  }
+
+  const router = createRouter({
+    catalogue,
+    cart,
+    handleItemQuantityChange,
+    handleItemDelete,
+    handleItemAddOrModify
+  })
+
+
 
   return (
 
