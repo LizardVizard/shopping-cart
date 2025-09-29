@@ -1,25 +1,21 @@
 import { useState } from "react"
 
 import style from "./ShoppingItem.module.css"
+import placeholder from "/vite.svg"
 
 import reactLogo from "../assets/react.svg"
 
-function ShopingItem({ name, image, price, quantity, handleClick }) {
-  // const [quantity, setQuantity] = useState(itemCount)
-  // TODO:
-  // controlled input for quantity
-
-  // const handleClick = () => {
-  //   console.log(`Buying ${quantity} ${name}`)
-  // }
+function ShoppingItem({ name, image, price, quantity, handleClick }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const amount = Number(e.target.quantity.value)
-    if (amount > 0) {
-      handleClick(amount)
-
+    const formData = new FormData(e.target)
+    const amount = parseInt(formData.get("quantity"), 10)
+    if (formData.get("quantity") === "" || isNaN(amount) || amount < 1) {
+      return
     }
+    handleClick(amount)
+
   }
 
   return (
@@ -27,7 +23,7 @@ function ShopingItem({ name, image, price, quantity, handleClick }) {
       <div className={style.card}>
         <div className={style.description}>
           <p>{name}</p>
-          <img src={image} alt="Item icon" />
+          <img src={image || placeholder} alt="Item image" />
         </div>
         <h2>${price}</h2>
         <form onSubmit={handleSubmit}>
@@ -38,8 +34,9 @@ function ShopingItem({ name, image, price, quantity, handleClick }) {
             max="999"
             step="1"
             placeholder="quantity"
+            aria-label="Quantity"
             defaultValue="1" />
-          <button className={style.button}>Buy</button>
+          <button className={style.button}>Add to cart</button>
         </form>
       </div>
     </>
@@ -47,4 +44,4 @@ function ShopingItem({ name, image, price, quantity, handleClick }) {
 
 }
 
-export default ShopingItem
+export default ShoppingItem
