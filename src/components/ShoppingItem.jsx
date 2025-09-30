@@ -20,7 +20,7 @@ function ShoppingItem({ name, image, price, quantity, handleClick }) {
 
   return (
     <>
-      <div className={style.card}>
+      <div className={style.card} data-testid="shopping-item">
         <div className={style.description}>
           <p>{name}</p>
           <img src={image || placeholder} alt="Item image" />
@@ -31,7 +31,7 @@ function ShoppingItem({ name, image, price, quantity, handleClick }) {
             name="quantity"
             type="number"
             min="1"
-            max="999"
+            max="99"
             step="1"
             placeholder="quantity"
             aria-label="Quantity"
