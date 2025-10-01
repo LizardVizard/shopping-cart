@@ -1,6 +1,6 @@
 # TODO:
 - [ ] Core:
-    - [ ] Store API(FakeStoreAPI, JSONPlaceholder.typicode) ?
+    - [x] Store API(FakeStoreAPI, JSONPlaceholder.typicode) ?
      - [X] Fetch data
      - [x] Check data for errors(network and request)
      - [X] Display products
@@ -17,11 +17,14 @@
     - [x] Nav bar
      - [x] dynamic item counter on cart link
     - [x] Routing for SPA
-    - [ ] Testing of components
-     - [ ] Shopping page(Item?)
-     - [ ] Cart page(Item?)
-     - [ ] Test edge cases:
-        - [ ] Boundary values 
-        - [ ] Wrong types of values
-        - [ ] No values
-        - [ ] Placholder image ?
+    - [ ] Testing
+     - [ ] Routing
+     - [ ] NavBar 
+     - [ ] Main component state change ?
+     - [x] Shopping page(Item?)
+     - [x] Cart page(Item?)
+     - [x] Test edge cases:
+        - [x] Boundary values 
+        - [x] Wrong types of values
+        - [x] No values
+        - [x] Placholder image ?

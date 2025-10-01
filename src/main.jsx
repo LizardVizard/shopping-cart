@@ -32,7 +32,6 @@ const Main = () => {
   // const [cart, setCart] = useState([])
 
   const handleItemQuantityChange = (itemId, itemQuantity) => {
-    console.log(itemId, itemQuantity, "this and that")
 
     // const itemQuantity = Number(quantity)
     //
