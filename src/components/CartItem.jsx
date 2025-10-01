@@ -3,7 +3,7 @@ import { useState } from "react"
 import placeholderImage from "/vite.svg"
 import style from "./CartItem.module.css"
 
-function CartItem({ name, image, quantity, itemChangeQuantity, itemDelete }) {
+function CartItem({ name, description, image, quantity, itemChangeQuantity, itemDelete }) {
   const [inputValue, setInputValue] = useState(quantity)
 
   const validateQuantity = (value) => {
@@ -45,7 +45,7 @@ function CartItem({ name, image, quantity, itemChangeQuantity, itemDelete }) {
       <img src={image || placeholderImage} alt="Item icon" />
       <div className={style.description}>
         <h3>{name}</h3>
-        <p>{"text"}</p>
+        <p>{description}</p>
       </div>
       <div className={style.controls}><div>
         <label>Quantity: <input

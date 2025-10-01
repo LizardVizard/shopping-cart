@@ -21,7 +21,8 @@ const CartPage = ({ cart, handleItemChangeQuantity, handleItemDelete }) => {
           cart.map((item) =>
             <CartItem
               key={item.id}
-              name={item.name}
+              name={item.title}
+              description={item.description}
               image={item.image}
               quantity={item.quantity}
               itemChangeQuantity={(quantity) => handleItemChangeQuantity(item.id, quantity)}

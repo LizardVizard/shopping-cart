@@ -18,6 +18,10 @@
   flex: 1;
 }
 
+.description > p {
+  padding: 1rem 6rem;
+}
+
 .item > button {
   height: fit-content;
 }
