@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useContext } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { RouterProvider, createBrowserRouter } from 'react-router'
+
+import './index.css'
+
+import reactLogo from "./assets/react.svg"
+
+import createRouter from './router.jsx'
+
+const catalogue = [
+  { id: 1, name: "Item1", stock: 1 },
+  { id: 2, name: "Item3", image: reactLogo, stock: 9834 },
+]
+
+const App = (testing = false) => {
+  const [cart, setCart] = useState([{ id: 0, name: "context test", quantity: 2, price: 10.50 }])
+
+  // For cart page
+  const handleItemQuantityChange = (itemId, itemQuantity) => {
+    setCart(cart.map((item) =>
+      item.id === itemId ?
+        { ...item, quantity: itemQuantity } :
+        item
+    ))
+  }
+
+  const handleItemDelete = (itemId) => {
+    setCart(cart.filter((item) => item.id !== itemId))
+  }
+
+  // For shopping page
+  const handleItemAddOrModify = (targetItem, quantity) => {
+    const cartItem = cart.find(item => item.id === targetItem.id)
+
+    if (cartItem) {
+      setCart(cart.map(item =>
+        item.id === cartItem.id ?
+          { ...item, quantity: item.quantity + quantity } :
+          item
+      ))
+    } else {
+      setCart([...cart, { ...targetItem, quantity: quantity }])
+    }
+  }
+
+  const router = createRouter({
+    catalogue,
+    cart,
+    handleItemQuantityChange,
+    handleItemDelete,
+    handleItemAddOrModify,
+    testing
+  })
+
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <RouterProvider router={router} />
   )
+
 }
 
 export default App
