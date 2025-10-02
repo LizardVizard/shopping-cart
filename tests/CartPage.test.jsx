@@ -56,6 +56,22 @@ describe('Cart page', () => {
         renderWithProps({ ...initialProps, cart: [] })
 
         expect(screen.getByRole("heading", { name: /no items/i, level: 2 })).toBeInTheDocument()
+        const totalCost = screen.getByRole("heading", { name: /total/i, level: 2 })
+        expect(totalCost).toBeInTheDocument()
+        expect(totalCost).toHaveTextContent("Total: $0.00")
+    })
+
+    it('renders correct total cost', () => {
+        renderWithProps(initialProps)
+
+        expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Cart")
+
+        let totalCost = screen.getByRole("heading", { level: 2 })
+        let testTotal =
+            initialProps.cart[0].price * initialProps.cart[0].quantity +
+            initialProps.cart[1].price * initialProps.cart[1].quantity +
+            initialProps.cart[2].price * initialProps.cart[2].quantity
+        expect(totalCost).toHaveTextContent(`Total: $${testTotal.toFixed(2)}`)
     })
 
     it('calls delete callback on Cart Item delete', async () => {
