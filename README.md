@@ -18,9 +18,9 @@
      - [x] dynamic item counter on cart link
     - [x] Routing for SPA
     - [ ] Testing
-     - [ ] Routing
-     - [ ] NavBar 
-     - [ ] Main component state change ?
+     - [x] Routing
+     - [x] NavBar
+     - [x] Main component state change ?
      - [x] Shopping page(Item?)
      - [x] Cart page(Item?)
      - [x] Test edge cases:
@@ -28,3 +28,4 @@
         - [x] Wrong types of values
         - [x] No values
         - [x] Placholder image ?
+    - [ ] clean up unused code and comments

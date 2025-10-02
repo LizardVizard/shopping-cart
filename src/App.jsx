@@ -14,7 +14,8 @@ const catalogue = [
 ]
 
 const App = (testing = false) => {
-  const [cart, setCart] = useState([{ id: 0, name: "context test", quantity: 2, price: 10.50 }])
+  // const [cart, setCart] = useState([{ id: 0, name: "context test", quantity: 2, price: 10.50 }])
+  const [cart, setCart] = useState([])
 
   // For cart page
   const handleItemQuantityChange = (itemId, itemQuantity) => {
