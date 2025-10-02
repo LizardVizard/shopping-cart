@@ -5,7 +5,7 @@ export default () => {
     <>
       <h1>Main page</h1>
       <p><Link to="/shop">Go to store</Link></p>
-      <p><Link to="/cart">Go to shoping cart</Link></p>
+      <p><Link to="/cart">Go to shopping cart</Link></p>
     </>
   )
 }
