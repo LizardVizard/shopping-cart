@@ -40,7 +40,6 @@ describe('Cart item component', () => {
         renderWithProps(initialData)
         const input = screen.getByLabelText(/quantity/i)
 
-        // Initial data.quantity is 3
         expect(input).toHaveValue(initialData.quantity)
 
         await user.clear(input)
@@ -53,42 +52,6 @@ describe('Cart item component', () => {
         expect(input).toHaveValue(1234)
 
     })
-
-    // it('ignores invalid input', async () => {
-    //     const user = userEvent.setup()
-    //     renderWithProps(initialData)
-    //     // const input = screen.getByRole("spinbutton")
-    //     const input = screen.getByLabelText(/quantity/i)
-    //
-    //     expect(input).toHaveValue(initialData.quantity)
-    //
-    //     // console.log(input.value, "AWDAWIDH0")
-    //     // await user.clear(input)
-    //     // expect(mockQuantityChange).toHaveBeenCalledWith(1)
-    //     //
-    //     // await user.click(input)
-    //     console.log(input.value, "AWDAWIDH1")
-    //     await user.type(input, "abc")
-    //     // await user.type(input, "a")
-    //     // await user.type(input, "b")
-    //     // await user.type(input, "c")
-    //     // await user.tab()
-    //     console.log(input.value, "AWDAWIDH")
-    //     // expect(mockQuantityChange).not.toHaveBeenCalled()
-    //     expect(mockQuantityChange).toHaveBeenCalledWith(1)
-    //
-    //     await user.type(input, ".2")
-    //     await user.tab()
-    //     expect(mockQuantityChange).toHaveBeenCalledWith(1)
-    //     expect(input).toHaveValue(1)
-    //
-    //     console.log(input.value, "AWDAWIDH")
-    //     await user.clear(input)
-    //     await user.type(input, "2")
-    //     expect(mockQuantityChange).toHaveBeenCalledWith(2)
-    //
-    //     // expect(input).toHaveValue(1)
-    // })
 
     describe('changes from invalid input to a default value of 1', () => {
         // NOTE:
@@ -126,17 +89,7 @@ describe('Cart item component', () => {
 
             expect(input).toHaveValue(3)
             expect(mockQuantityChange).toHaveBeenCalledWith(3)
-
-
-            // const user = userEvent.setup()
-            //
-            // await user.type(input, ".2")
-            // await user.tab()
-            //
-            // expect(mockQuantityChange).toHaveBeenCalledWith(3)
-            // expect(input).toHaveValue(3)
         })
-
     })
 
     it('calls delete callback when delete button is pressed', async () => {
@@ -154,8 +107,8 @@ describe('Cart item component', () => {
 
         expect(img).toBeInTheDocument()
         expect(img).toHaveAttribute("src", expect.stringContaining('data:image/svg+xml'))
-
     })
+
     it('renders provided image', () => {
         const testImage = "product-image.png"
         renderWithProps({ ...initialData, image: testImage })
@@ -164,6 +117,5 @@ describe('Cart item component', () => {
 
         expect(img).toBeInTheDocument()
         expect(img).toHaveAttribute("src", expect.stringMatching(testImage))
-
     })
 })

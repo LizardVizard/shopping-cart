@@ -70,15 +70,6 @@ describe('Shop item', () => {
         await user.click(button)
         expect(mockHandleItemClick).toHaveBeenCalledWith(12)
         expect(mockHandleItemClick).toHaveBeenCalledTimes(2)
-
-        // await user.clear(quantityInput)
-        // await user.type(quantityInput, "34.9")
-        //
-        // fireEvent.change(quantityInput, { target: { value: "34.9" } })
-        // await user.click(button)
-        // console.log(quantityInput.value)
-        // expect(mockHandleItemClick).toHaveBeenCalledWith(34)
-        // expect(mockHandleItemClick).toHaveBeenCalledTimes(3)
     })
 
     it('does not call callback with invalid values', async () => {

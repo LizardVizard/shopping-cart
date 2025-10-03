@@ -1,20 +1,13 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 
-import { RouterProvider, createBrowserRouter } from 'react-router'
+import { RouterProvider } from 'react-router'
 
 import './index.css'
 
-import reactLogo from "./assets/react.svg"
-
 import createRouter from './router.jsx'
 
-const catalogue = [
-  { id: 1, name: "Item1", stock: 1 },
-  { id: 2, name: "Item3", image: reactLogo, stock: 9834 },
-]
 
 const App = (testing = false) => {
-  // const [cart, setCart] = useState([{ id: 0, name: "context test", quantity: 2, price: 10.50 }])
   const [cart, setCart] = useState([])
 
   // For cart page
@@ -46,7 +39,6 @@ const App = (testing = false) => {
   }
 
   const router = createRouter({
-    catalogue,
     cart,
     handleItemQuantityChange,
     handleItemDelete,

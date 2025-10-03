@@ -91,8 +91,6 @@ describe('Cart page', () => {
         itemId = mockItemDelete.mock.calls.at(-1)[0]
         expect(itemId).toEqual(initialProps.cart[itemToDelete].id)
         expect(buttons).toHaveLength(initialProps.cart.length)
-
-
     })
 
     it('calls change callback on Cart Item quantity change', async () => {

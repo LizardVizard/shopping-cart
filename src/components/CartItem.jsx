@@ -1,10 +1,7 @@
-import { useState } from "react"
-
 import placeholderImage from "/vite.svg"
 import style from "./CartItem.module.css"
 
 function CartItem({ name, description, image, quantity, itemChangeQuantity, itemDelete }) {
-  const [inputValue, setInputValue] = useState(quantity)
 
   const validateQuantity = (value) => {
     const number = parseInt(value, 10)
@@ -18,14 +15,12 @@ function CartItem({ name, description, image, quantity, itemChangeQuantity, item
   const checkValidity = (e) => {
     const validated = validateQuantity(e.target.value)
     if (!validated) {
-      // setInputValue(1)
       e.target.value = 1
       itemChangeQuantity(1)
     }
   }
 
   const handleChange = (e) => {
-    // setInputValue(e.target.value)
 
     const validated = validateQuantity(e.target.value)
     if (validated) {

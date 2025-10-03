@@ -20,7 +20,6 @@ describe("main component", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Main page")
   });
 
-
   describe('main page links', () => {
     it('navigates to shopping page', async () => {
       await user.click(screen.getByText("Go to store"))
@@ -31,9 +30,7 @@ describe("main component", () => {
     it('navigates to cart page', async () => {
       await user.click(screen.getByText("Go to shopping cart"))
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Cart")
-
     })
-
   })
 
   describe('navbar links', () => {
@@ -45,7 +42,6 @@ describe("main component", () => {
     it('navigates to cart page', async () => {
       await user.click(screen.getByText("Cart"))
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Cart")
-
     })
 
     it('navigates back to main page', async () => {
@@ -83,7 +79,6 @@ describe("main component", () => {
     afterEach(() => {
       vi.restoreAllMocks()
     })
-
 
     const addItems = async (items) => {
       await user.click(screen.getByText("Store page"))
@@ -140,8 +135,6 @@ describe("main component", () => {
           { index: 1, quantity: 6 },
         ])
       })
-
-
     })
 
     it('deletes item from cart', async () => {
@@ -162,82 +155,7 @@ describe("main component", () => {
       ])
 
       expect(screen.queryByText(testCatalogue[1].title)).toBeNull()
-
-
     })
-    // Mock fetch response
-    // Navigate to store
-    // Add items
-    // Add some of the same items to test addition of quantity
-    // Navigate to Cart page
-    // CHeck that quanityt changes
-    // Check that deletion works
   })
 
 });
-/* it('adds item to cart', async () => {
-  await user.click(screen.getByText("Store page"))
-
-  const itemAddButtons = await screen.findAllByText("Add to cart")
-
-  const itemIndex = 1
-  await user.click(itemAddButtons[itemIndex])
-
-  await user.click(screen.getByText("Cart"))
-
-  const itemNamesInCart = screen.getAllByRole("heading", { level: 3 })
-  const itemQuantityInCart = screen.getAllByLabelText("Quantity:")
-
-  expect(itemNamesInCart).toHaveLength(1)
-  expect(itemNamesInCart[0]).toHaveTextContent(testCatalogue[itemIndex].title)
-  expect(itemQuantityInCart[0]).toHaveValue(1)
-
-})
-
-it('adds quantity to existing items', async () => {
-  await user.click(screen.getByText("Store page"))
-  let itemAddButtons = await screen.findAllByText("Add to cart")
-
-  // Adding first item
-  await user.click(itemAddButtons[0])
-  // Adding second item
-  await user.click(itemAddButtons[1])
-
-  await user.click(screen.getByText("Cart"))
-
-  let itemNamesInCart = screen.getAllByRole("heading", { level: 3 })
-  let itemQuantityInCart = screen.getAllByLabelText("Quantity:")
-
-  expect(itemNamesInCart).toHaveLength(2)
-  // First item
-  expect(itemNamesInCart[0]).toHaveTextContent(testCatalogue[0].title)
-  expect(itemQuantityInCart[0]).toHaveValue(1)
-  // Second item
-  expect(itemNamesInCart[1]).toHaveTextContent(testCatalogue[1].title)
-  expect(itemQuantityInCart[1]).toHaveValue(1)
-
-
-  // ### Additional quantity
-  await user.click(screen.getByText("Store page"))
-
-  itemAddButtons = await screen.findAllByText("Add to cart")
-  itemQuantityInCart = screen.getAllByRole("spinbutton", { name: /quantity/i })
-
-  // Adding second item again with a different quantity
-  await user.clear(itemQuantityInCart[1])
-  await user.type(itemQuantityInCart[1], "5")
-  await user.click(itemAddButtons[1])
-
-  await user.click(screen.getByText("Cart"))
-
-  itemNamesInCart = screen.getAllByRole("heading", { level: 3 })
-  itemQuantityInCart = screen.getAllByRole("spinbutton", { name: /quantity/i })
-
-  expect(itemNamesInCart).toHaveLength(2)
-  // First item
-  expect(itemNamesInCart[0]).toHaveTextContent(testCatalogue[0].title)
-  expect(itemQuantityInCart[0]).toHaveValue(1)
-  // Second item
-  expect(itemNamesInCart[1]).toHaveTextContent(testCatalogue[1].title)
-  expect(itemQuantityInCart[1]).toHaveValue(6)
-}) */

@@ -1,11 +1,7 @@
-import { useState } from "react"
-
 import style from "./ShoppingItem.module.css"
 import placeholder from "/vite.svg"
 
-import reactLogo from "../assets/react.svg"
-
-function ShoppingItem({ name, image, price, quantity, handleClick }) {
+function ShoppingItem({ name, image, price, handleClick }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()

@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react"
-import { CartContext } from "../CartContext"
+import { useEffect, useState } from "react"
 import ShoppingItem from "../components/ShoppingItem"
 
 import style from "./ShoppingPage.module.css"

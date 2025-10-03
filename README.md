@@ -29,3 +29,4 @@
         - [x] No values
         - [x] Placholder image ?
     - [ ] clean up unused code and comments
+    - [ ] add config for routing for vercel

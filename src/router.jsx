@@ -7,7 +7,6 @@ import CartPage from "./pages/CartPage.jsx";
 import Layout from "./components/Layout.jsx";
 
 const createRouter = ({
-  catalogue,
   cart,
   handleItemQuantityChange,
   handleItemDelete,
@@ -22,7 +21,6 @@ const createRouter = ({
         { index: true, element: <MainPage /> },
         {
           path: "shop", element: <ShoppingPage
-            catalogue={catalogue}
             handleItemAddOrModify={handleItemAddOrModify}
           />
         },
