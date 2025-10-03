@@ -14,6 +14,7 @@ describe('Shop item', () => {
     const testData = {
         name: "Product A",
         price: 150,
+        image: "/path/test-image.png"
     }
 
     const renderWithProps = (props) => {
@@ -30,12 +31,13 @@ describe('Shop item', () => {
         const quantityInput = screen.getByRole("spinbutton")
 
         expect(itemName).toBeInTheDocument()
+        expect(itemName).toHaveTextContent(testData.name)
         expect(itemPrice).toHaveTextContent(`$${testData.price}`)
         expect(quantityInput).toHaveValue(1)
     })
 
     it('uses placeholder image if no image is provided', () => {
-        renderWithProps(testData)
+        renderWithProps({ ...testData, image: null })
         const img = screen.getByAltText("Item image")
 
         expect(img).toBeInTheDocument()
@@ -44,7 +46,7 @@ describe('Shop item', () => {
     })
 
     it('uses provided image', () => {
-        renderWithProps({ ...testData, image: "/path/test-image.png" })
+        renderWithProps(testData)
         const img = screen.getByAltText("Item image")
 
         expect(img).toBeInTheDocument()
@@ -84,19 +86,19 @@ describe('Shop item', () => {
         const user = userEvent.setup()
         renderWithProps(testData)
 
-        const button = screen.getByRole("button", { name: /add to cart/i })
+        const addToCartButton = screen.getByRole("button", { name: /add to cart/i })
         const quantityInput = screen.getByRole("spinbutton")
 
         await user.clear(quantityInput)
         await user.type(quantityInput, "-1")
         expect(quantityInput).toHaveValue(-1)
-        await user.click(button)
+        await user.click(addToCartButton)
 
 
         await user.clear(quantityInput)
         await user.type(quantityInput, "34.2")
         expect(quantityInput).toHaveValue(34.2)
-        await user.click(button)
+        await user.click(addToCartButton)
 
 
         // NOTE:
@@ -105,12 +107,10 @@ describe('Shop item', () => {
         // when using Chrome based browsers.
         // To keep the quantity input of type number, fireEvent is used to force value update.
         fireEvent.change(quantityInput, { target: { value: "abc" } })
-        await user.click(button)
+        await user.click(addToCartButton)
         expect(quantityInput.value).toBe("")
 
-
         expect(mockHandleItemClick).not.toHaveBeenCalled()
-
     })
 
 })

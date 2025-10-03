@@ -1,5 +1,5 @@
 import { screen, render, fireEvent } from "@testing-library/react"
-import { describe, it, vi } from "vitest"
+import { beforeEach, describe, it, vi } from "vitest"
 import { userEvent } from "@testing-library/user-event"
 
 import CartPage from "../src/pages/CartPage"
@@ -54,6 +54,9 @@ describe('Cart page', () => {
 
     it('shows message when no items in the cart', () => {
         renderWithProps({ ...initialProps, cart: [] })
+
+        const cartItemsImgs = screen.queryAllByRole("img", { alt: "Item icon" })
+        expect(cartItemsImgs.length).toBe(0)
 
         expect(screen.getByRole("heading", { name: /no items/i, level: 2 })).toBeInTheDocument()
         const totalCost = screen.getByRole("heading", { name: /total/i, level: 2 })
@@ -111,58 +114,59 @@ describe('Cart page', () => {
         expect(mockItemChangeQuantity).toHaveBeenCalledWith(itemIdToChange, 35)
         expect(mockItemChangeQuantity).toHaveBeenCalledWith(itemIdToChange, 357)
         expect(mockItemChangeQuantity).toHaveBeenCalledTimes(3)
-
     })
 
-    it('calls change callback with a fallback value on invalid input', async () => {
-        const user = userEvent.setup()
-        let itemIndexToChangeQuantity
+    describe('calls change callback with a fallback value on invalid input', async () => {
+        let user
+        let quantityInput
         let itemIdToChange
+        beforeEach(async () => {
+            user = userEvent.setup()
 
-        renderWithProps(initialProps)
+            renderWithProps(initialProps)
 
-        const quantityInputs = screen.getAllByLabelText(/quantity/i)
+            const quantityInputs = screen.getAllByLabelText(/quantity/i)
 
-        itemIndexToChangeQuantity = 2
-        const quantityInput = quantityInputs[itemIndexToChangeQuantity]
-        itemIdToChange = initialProps.cart[itemIndexToChangeQuantity].id
-        expect(itemIdToChange).toEqual(initialProps.cart[itemIndexToChangeQuantity].id)
+            const itemIndexToChangeQuantity = 2
+            quantityInput = quantityInputs[itemIndexToChangeQuantity]
+            itemIdToChange = initialProps.cart[itemIndexToChangeQuantity].id
+        })
 
+        test('empty input', async () => {
+            await user.clear(quantityInput)
+            await user.tab()
 
-        // Empty input
-        await user.clear(quantityInput)
-        await user.tab()
+            expect(mockItemChangeQuantity).toHaveBeenCalledWith(itemIdToChange, 1)
+            expect(mockItemChangeQuantity).toHaveBeenCalledTimes(1)
+        })
 
-        expect(mockItemChangeQuantity).toHaveBeenCalledWith(itemIdToChange, 1)
-        expect(mockItemChangeQuantity).toHaveBeenCalledTimes(1)
-        mockItemChangeQuantity.mockClear()
+        test('out of range', async () => {
+            await user.clear(quantityInput)
+            await user.type(quantityInput, "-1")
+            await user.tab()
 
-        // Invalid values
-        await user.type(quantityInput, "-1")
-        await user.tab()
+            expect(mockItemChangeQuantity).toHaveBeenCalledWith(itemIdToChange, 1)
+            expect(mockItemChangeQuantity).toHaveBeenCalledTimes(1)
+        })
 
-        expect(mockItemChangeQuantity).toHaveBeenCalledWith(itemIdToChange, 1)
-        expect(mockItemChangeQuantity).toHaveBeenCalledTimes(1)
-        mockItemChangeQuantity.mockClear()
+        test('decimal input', async () => {
+            await user.clear(quantityInput)
+            await user.type(quantityInput, "0.4")
+            await user.tab()
 
-        await user.clear(quantityInput)
-        await user.type(quantityInput, "0.4")
-        await user.tab()
+            expect(mockItemChangeQuantity).toHaveBeenCalledWith(itemIdToChange, 1)
+            expect(mockItemChangeQuantity).toHaveBeenCalledTimes(1)
+        })
 
-        expect(mockItemChangeQuantity).toHaveBeenCalledWith(itemIdToChange, 1)
-        expect(mockItemChangeQuantity).toHaveBeenCalledTimes(1)
-        mockItemChangeQuantity.mockClear()
-
-
-        // Non-numberic input
         // NOTE: Chrome doesn't allow letters in number input,
         // but Firefox does, so tests with letters have to be done like this
-        fireEvent.change(quantityInput, { target: { value: "abc" } })
-        fireEvent.blur(quantityInput)
+        test('non-numeric input', async () => {
+            fireEvent.change(quantityInput, { target: { value: "abc" } })
+            fireEvent.blur(quantityInput)
 
-        expect(mockItemChangeQuantity).toHaveBeenCalledWith(itemIdToChange, 1)
-        expect(mockItemChangeQuantity).toHaveBeenCalledTimes(1)
-        mockItemChangeQuantity.mockClear()
+            expect(mockItemChangeQuantity).toHaveBeenCalledWith(itemIdToChange, 1)
+            expect(mockItemChangeQuantity).toHaveBeenCalledTimes(1)
+        })
     })
 
 })

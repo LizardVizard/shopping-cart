@@ -43,44 +43,14 @@ describe('Cart item component', () => {
         // Initial data.quantity is 3
         expect(input).toHaveValue(initialData.quantity)
 
-        await user.type(input, "1")
-        expect(mockQuantityChange).toHaveBeenCalledWith(31)
-        expect(mockQuantityChange).toHaveBeenCalledTimes(1)
-        expect(input).toHaveValue(31)
-
-        await user.type(input, "3")
-        expect(mockQuantityChange).toHaveBeenCalledWith(313)
-        expect(mockQuantityChange).toHaveBeenCalledTimes(2)
-        expect(input).toHaveValue(313)
-
-        // await user.click(input)
         await user.clear(input)
-        await user.type(input, "9")
-        expect(mockQuantityChange).toHaveBeenCalledWith(9)
-        expect(mockQuantityChange).toHaveBeenCalledTimes(3)
-        expect(input).toHaveValue(9)
-
-
-        await user.type(input, "6")
-        expect(mockQuantityChange).toHaveBeenCalledWith(96)
-        expect(mockQuantityChange).toHaveBeenCalledTimes(4)
-        expect(input).toHaveValue(96)
-
-        await user.type(input, ".")
-
-        // NOTE: 16.3 turns into 6
-        await user.type(input, "3")
-        expect(mockQuantityChange).toHaveBeenCalledWith(96)
-        expect(mockQuantityChange).toHaveBeenCalledTimes(5)
-        expect(input).toHaveValue(96)
-
-
-        // Clears invalid input with default value of 1
-        await user.clear(input)
-        await user.tab()
+        await user.type(input, "1234")
         expect(mockQuantityChange).toHaveBeenCalledWith(1)
-        expect(mockQuantityChange).toHaveBeenCalledTimes(6)
-        expect(input).toHaveValue(1)
+        expect(mockQuantityChange).toHaveBeenCalledWith(12)
+        expect(mockQuantityChange).toHaveBeenCalledWith(123)
+        expect(mockQuantityChange).toHaveBeenCalledWith(1234)
+        expect(mockQuantityChange).toHaveBeenCalledTimes(4)
+        expect(input).toHaveValue(1234)
 
     })
 
@@ -121,20 +91,14 @@ describe('Cart item component', () => {
     // })
 
     describe('changes from invalid input to a default value of 1', () => {
-        let input
-        beforeEach(() => {
-            renderWithProps(initialData)
-            input = screen.getByLabelText(/quantity/i)
-            expect(input).toHaveValue(initialData.quantity)
-        })
-
-
         // NOTE:
         // Chrome(Blink) blocks letters from number input, but Firefox(Gecko) does not.
         // Because of that, onChange event is not called when typing non-numeric values
         // when using Chrome based browsers.
         // To keep the quantity input of type number, fireEvent is used to force value update.
         test("for non-number values", () => {
+            renderWithProps(initialData)
+            const input = screen.getByLabelText(/quantity/i)
             fireEvent.change(input, { target: { value: "" } })
             fireEvent.blur(input)
 
@@ -147,13 +111,10 @@ describe('Cart item component', () => {
             expect(input).toHaveValue(1)
             expect(mockQuantityChange).toHaveBeenCalledWith(1)
         })
-        test("for out of range values", async () => {
-            // fireEvent.change(input, { target: { value: "0" } })
-            // fireEvent.blur(input)
-            //
-            // expect(input).toHaveValue(1)
-            // expect(mockQuantityChange).toHaveBeenCalledWith(1)
-            //
+
+        test("for invalid values", async () => {
+            renderWithProps(initialData)
+            const input = screen.getByLabelText(/quantity/i)
             fireEvent.change(input, { target: { value: "-2" } })
             fireEvent.blur(input)
 

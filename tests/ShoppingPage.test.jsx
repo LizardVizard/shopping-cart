@@ -53,10 +53,11 @@ describe('Shopping page', () => {
     it('renders', async () => {
         mockFetch()
         renderWithProps()
-        const title = screen.getByRole("heading", { level: 1 })
 
+        const title = await screen.findByRole("heading", { level: 1 })
         expect(title).toBeInTheDocument()
         expect(title).toHaveTextContent("Store")
+
     })
 
     describe('data fetching', () => {
@@ -73,7 +74,7 @@ describe('Shopping page', () => {
         })
 
         it('renders on network error', async () => {
-            const errorMessage = "Error 404"
+            const errorMessage = "Error 500"
             mockFetchReject(errorMessage)
             renderWithProps()
 
