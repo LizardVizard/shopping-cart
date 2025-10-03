@@ -28,5 +28,5 @@
         - [x] Wrong types of values
         - [x] No values
         - [x] Placholder image ?
-    - [ ] clean up unused code and comments
-    - [ ] add config for routing for vercel
+    - [x] clean up unused code and comments
+    - [x] add config for routing for vercel
