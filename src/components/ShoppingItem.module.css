@@ -13,21 +13,25 @@
   font-weight: bold;
 }
 
-.description > img {
-  min-width: 150px;
-  height: 150px;
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   flex: 1;
+}
+.description > img {
+  height: 150px;
+  object-fit: contain;
+  justify-self: center;
 }
 
 form {
   display: flex;
-  /* flex-direction: column; */
   gap: 5px;
   align-items: center;
 }
 
 form > input {
-  /* width: 50%; */
   height: 1.2rem;
 }
 
